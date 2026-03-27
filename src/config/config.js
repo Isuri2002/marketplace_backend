@@ -31,6 +31,9 @@ const envVarsSchema = Joi.object()
       .required()
       .description("Cloudinary API secret"),
     FRONTEND_WEB_URL: Joi.string().description("Frontend web URL"),
+    FRONTEND_ALLOWED_ORIGINS: Joi.string().description(
+      "Comma-separated CORS allowlist for frontend origins",
+    ),
   })
   .unknown();
 
@@ -55,6 +58,7 @@ module.exports = {
   },
   frontendURLs: {
     web: envVars.FRONTEND_WEB_URL,
+    allowedOrigins: envVars.FRONTEND_ALLOWED_ORIGINS,
   },
   jwt: {
     secret: envVars.JWT_SECRET,

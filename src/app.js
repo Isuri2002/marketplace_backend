@@ -41,12 +41,21 @@ app.use(mongoSanitize());
 app.use(compression());
 
 // enable cors with an origin allowlist
-const parsedFrontendOrigins = String(config.frontendURLs.web || "")
+const frontendOriginSource =
+  config.frontendURLs.allowedOrigins || config.frontendURLs.web || "";
+
+const parsedFrontendOrigins = String(frontendOriginSource)
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
 const allowedOrigins = new Set(parsedFrontendOrigins);
+const wildcardOriginRegexes = parsedFrontendOrigins
+  .filter((origin) => origin.includes("*"))
+  .map((origin) => {
+    const escaped = origin.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp(`^${escaped.replace(/\*/g, ".*")}$`);
+  });
 
 if (config.env !== "production") {
   ["http://localhost:3000", "http://127.0.0.1:3000"].forEach((origin) =>
@@ -62,6 +71,10 @@ const corsOptions = {
     }
 
     if (allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+
+    if (wildcardOriginRegexes.some((regex) => regex.test(origin))) {
       return callback(null, true);
     }
 
