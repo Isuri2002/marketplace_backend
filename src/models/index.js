@@ -1,0 +1,14 @@
+module.exports.Token = require('./token.model');
+module.exports.User = require('./user.model');
+module.exports.Category = require('./category.model');
+module.exports.CategoryDynamicField = require('./dynamic-field.model');
+module.exports.Ad = require('./ad.model');
+module.exports.Addons = require('./addon.model');
+module.exports.Review = require('./review.model');
+module.exports.Feature = require('./feature.model');
+module.exports.IdVerification = require('./id-verification.model');
+module.exports.FeaturedCategory = require('./featured-category.model');
+module.exports.Navigation = require('./navigation.model');
+module.exports.AuditLog = require('./audit-log.model');
+module.exports.Favorite = require('./favorite.model');
+module.exports.Booking = require('./booking.model');

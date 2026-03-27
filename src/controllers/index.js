@@ -1,0 +1,9 @@
+module.exports.authController = require('./auth.controller');
+module.exports.userController = require('./user.controller');
+module.exports.idVerificationController = require('./id-verification.controller');
+module.exports.featuredCategoryController = require('./featured-category.controller');
+module.exports.navigationController = require('./navigation.controller');
+module.exports.auditLogController = require('./audit-log.controller');
+module.exports.metricsController = require('./metrics.controller');
+module.exports.permissionController = require('./permission.controller');
+module.exports.favoriteController = require('./favorite.controller');
